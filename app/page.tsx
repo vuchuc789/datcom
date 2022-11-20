@@ -1,14 +1,37 @@
 'use client';
 
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
+import { useFirebase } from '../hooks/useFirebase';
 
 const Container = styled.div`
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.palette.secondary.main};
 `;
 
-export default function Home() {
-  return <Container>A reworked &apos;dat com&apos; app</Container>;
-}
+const RootPage: React.FC = () => {
+  const { signInWithGooglePopup } = useFirebase();
+  return (
+    <Container>
+      <Button
+        variant="contained"
+        onClick={async () => {
+          try {
+            // eslint-disable-next-line no-console
+            console.log(await signInWithGooglePopup());
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e);
+          }
+        }}
+      >
+        Đăng nhập
+      </Button>
+    </Container>
+  );
+};
+
+export default RootPage;

@@ -7,14 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "ANALYZE=true next build"
+    "type": "tsc",
+    "prepare": "husky install",
+    "dev:emulator": "concurrently -n \"firebase,react\" -p \"[{name}|{time}]\" -c \"yellow,blue\" -t \"HH:mm:ss.SSS\" \"firebase emulators:start\" \"next dev\"",
+    "build:analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "emotion-reset": "^3.0.1",
+    "@mui/material": "^5.10.14",
+    "@next/font": "^13.0.4",
+    "firebase": "^9.14.0",
     "next": "13.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -26,11 +31,19 @@
     "@types/react-dom": "18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
+    "concurrently": "^7.5.0",
     "eslint": "^8.28.0",
     "eslint-config-next": "^13.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "firebase-tools": "^11.16.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "4.9.3"
+  },
+  "engines": {
+    "node": ">=18 <19",
+    "pnpm": ">=7"
   }
 }

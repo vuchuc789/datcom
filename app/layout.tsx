@@ -1,11 +1,9 @@
-import EmotionRegistry from './emotion';
-import { GlobalStyles } from './GlobalStyles';
+import { EmotionRegistry } from '../lib/EmotionRegistry';
+import { ThemeProvider } from '../contexts/ThemeContext';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+type RootLayoutProps = React.PropsWithChildren;
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
       {/*
@@ -15,10 +13,11 @@ export default function RootLayout({
       <head />
       <body>
         <EmotionRegistry>
-          <GlobalStyles />
-          <>{children}</>
+          <ThemeProvider>{children}</ThemeProvider>
         </EmotionRegistry>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

@@ -5,11 +5,11 @@ import { CacheProvider } from '@emotion/react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useState } from 'react';
 
-export default function RootStyleRegistry({
+type EmotionRegistryProps = React.PropsWithChildren;
+
+export const EmotionRegistry: React.FC<EmotionRegistryProps> = ({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}) => {
   const [{ cache, flush }] = useState(() => {
     const cache = createCache({ key: 'dat-com' });
     cache.compat = true;
@@ -51,4 +51,4 @@ export default function RootStyleRegistry({
   });
 
   return <CacheProvider value={cache}>{children}</CacheProvider>;
-}
+};
