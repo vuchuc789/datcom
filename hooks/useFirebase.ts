@@ -25,7 +25,7 @@ export const useFirebase = () => {
 
       if (
         process.env.NODE_ENV !== 'production' &&
-        process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS
+        process.env.NEXT_PUBLIC_EMULATOR
       ) {
         const { getAuth, connectAuthEmulator } = await import('firebase/auth');
 

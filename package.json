@@ -11,7 +11,7 @@
     "test:watch": "jest --watch",
     "type": "tsc",
     "prepare": "husky install",
-    "dev:emulator": "concurrently -n \"firebase,react\" -p \"[{name}|{time}]\" -c \"yellow,blue\" -t \"HH:mm:ss.SSS\" \"firebase emulators:start\" \"next dev\"",
+    "dev:emulator": "concurrently -n \"firebase,next\" -p \"[{name}|{time}]\" -c \"yellow,blue\" -t \"HH:mm:ss.SSS\" \"firebase emulators:start\" \"NEXT_PUBLIC_EMULATOR=true next dev\"",
     "build:analyze": "ANALYZE=true next build"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@next/bundle-analyzer": "^13.0.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@types/jest": "^29.2.3",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",

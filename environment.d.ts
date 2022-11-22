@@ -9,6 +9,6 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_APP_ID?: string;
     readonly NEXT_PUBLIC_MEASUREMENT_ID?: string;
 
-    readonly NEXT_PUBLIC_USE_FIREBASE_EMULATORS?: boolean;
+    readonly NEXT_PUBLIC_EMULATOR?: boolean;
   }
 }
