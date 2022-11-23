@@ -2,4 +2,4 @@
 
 ### Author
 
-["Vũ Chức"](https://github.com/vuchuc789)
+[Vũ Chức](https://github.com/vuchuc789)
