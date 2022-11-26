@@ -1,6 +1,19 @@
 'use client';
 
-import type { FirebaseApp, FirebaseOptions } from 'firebase/app';
+import {
+  FirebaseApp,
+  FirebaseOptions,
+  getApp as getFirebaseApp,
+  initializeApp,
+} from 'firebase/app';
+import {
+  connectAuthEmulator,
+  getAuth as getFirebaseAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut as firebaseSignOut,
+} from 'firebase/auth';
+import { useCallback } from 'react';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -13,13 +26,11 @@ const firebaseConfig: FirebaseOptions = {
 } as const;
 
 export const useFirebase = () => {
-  const getApp = async () => {
-    const { getApp, initializeApp } = await import('firebase/app');
-
+  const getApp = useCallback(async () => {
     let app: FirebaseApp;
 
     try {
-      app = getApp();
+      app = getFirebaseApp();
     } catch {
       app = initializeApp(firebaseConfig);
 
@@ -27,37 +38,34 @@ export const useFirebase = () => {
         process.env.NODE_ENV !== 'production' &&
         process.env.NEXT_PUBLIC_EMULATOR
       ) {
-        const { getAuth, connectAuthEmulator } = await import('firebase/auth');
-
-        const auth = getAuth(app);
+        const auth = getFirebaseAuth(app);
 
         connectAuthEmulator(auth, 'http://localhost:9099');
       }
     }
 
     return app;
-  };
+  }, []);
 
-  const getAuth = async () => {
-    const { getAuth } = await import('firebase/auth');
-
+  const getAuth = useCallback(async () => {
     const app = await getApp();
-    const auth = getAuth(app);
+    const auth = getFirebaseAuth(app);
 
     return auth;
-  };
+  }, [getApp]);
 
-  const signInWithGooglePopup = async () => {
-    const { GoogleAuthProvider, signInWithPopup } = await import(
-      'firebase/auth'
-    );
-
+  const signInWithGooglePopup = useCallback(async () => {
     const auth = await getAuth();
     const provider = new GoogleAuthProvider();
 
-    // TODO: update user info to context, remove return <20-11-22, Vuchuc> //
-    return await signInWithPopup(auth, provider);
-  };
+    await signInWithPopup(auth, provider);
+  }, [getAuth]);
 
-  return { signInWithGooglePopup };
+  const signOut = useCallback(async () => {
+    const auth = await getAuth();
+
+    await firebaseSignOut(auth);
+  }, [getAuth]);
+
+  return { getAuth, signInWithGooglePopup, signOut };
 };
