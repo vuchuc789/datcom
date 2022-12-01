@@ -1,4 +1,7 @@
-import { RootWrapper } from '../components/RootWrapper';
+import { AuthProvider } from '../contexts/AuthContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
+import { UtilsProvider } from '../contexts/UtilsContext';
+import { EmotionRegistry } from '../lib/EmotionRegistry';
 type RootLayoutProps = React.PropsWithChildren;
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
@@ -10,7 +13,13 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
       */}
       <head />
       <body>
-        <RootWrapper>{children}</RootWrapper>
+        <EmotionRegistry>
+          <ThemeProvider>
+            <UtilsProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </UtilsProvider>
+          </ThemeProvider>
+        </EmotionRegistry>
       </body>
     </html>
   );
