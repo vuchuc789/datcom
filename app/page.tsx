@@ -16,24 +16,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { useUtils } from '../contexts/UtilsContext';
 import { stringAvatar, stringToColor } from '../helpers/avatar';
 
-// <Button
-//   variant="contained"
-//   onClick={async () => {
-//     try {
-//       setLoading(true);
-//       await signInWithGooglePopup();
-//     } catch (e) {
-//       if (e instanceof Error) {
-//         showAlert(e.message);
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   }}
-// >
-//   Đăng nhập
-// </Button>
-
 const Logo = styled.div`
   flex-grow: 1;
 `;
@@ -89,8 +71,8 @@ const RootPage: React.FC = () => {
                     <Image
                       src={user.photoURL}
                       alt="User Avatar"
-                      width={32}
-                      height={32}
+                      width={40}
+                      height={40}
                     />
                   ) : (
                     stringAvatar(user.displayName || '')

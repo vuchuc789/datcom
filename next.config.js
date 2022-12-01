@@ -8,6 +8,11 @@ const nextConfig = {
   // compiler: {
   //   emotion: true,
   // },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**.googleusercontent.com' },
+    ],
+  },
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
