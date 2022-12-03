@@ -23,7 +23,7 @@ const handler = async (
 
     res.status(200).json({ data: decodedToken });
   } catch (e) {
-    res.status(500).json({ error: e as string });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
