@@ -5,6 +5,10 @@ import {
   AlertColor,
   Backdrop,
   CircularProgress,
+  Grow,
+  GrowProps,
+  Slide,
+  SlideProps,
   Snackbar,
 } from '@mui/material';
 import { createContext, useCallback, useContext, useState } from 'react';
@@ -20,7 +24,12 @@ const UtilsContext = createContext<UtilsState | null>(null);
 type UtilsProviderProps = React.PropsWithChildren;
 
 export const UtilsProvider: React.FC<UtilsProviderProps> = ({ children }) => {
-  const [alert, setAlert] = useState<{ message: string; type: AlertColor }>({
+  const [alert, setAlert] = useState<{
+    message: string;
+    type: AlertColor;
+    isOpened: boolean;
+  }>({
+    isOpened: false,
     message: '',
     type: 'error',
   });
@@ -29,13 +38,15 @@ export const UtilsProvider: React.FC<UtilsProviderProps> = ({ children }) => {
 
   const showAlert = useCallback(
     (message: string, type: AlertColor = 'error') => {
-      setAlert({ message, type });
+      setAlert((prev) =>
+        !prev.isOpened ? { isOpened: true, message, type } : prev
+      );
     },
     []
   );
 
   const close = useCallback(() => {
-    setAlert({ message: '', type: 'error' });
+    setAlert(({ message, type }) => ({ isOpened: false, message, type }));
   }, []);
 
   return (
@@ -45,12 +56,13 @@ export const UtilsProvider: React.FC<UtilsProviderProps> = ({ children }) => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <Snackbar
-        open={!!alert.message}
+        open={!!alert.isOpened}
         onClose={close}
         autoHideDuration={3000}
         anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+        TransitionComponent={Slide}
       >
-        <Alert onClose={close} severity={alert.type}>
+        <Alert onClose={close} severity={alert.type} variant="filled">
           {alert.message}
         </Alert>
       </Snackbar>
