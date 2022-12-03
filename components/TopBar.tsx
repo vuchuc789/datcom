@@ -36,6 +36,7 @@ export const TopBar: React.FC = () => {
               alt="Rice Bowl Icon"
               width={48}
               height={48}
+              priority
             />
           </Logo>
           {user === null && (
