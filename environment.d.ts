@@ -12,9 +12,6 @@ declare namespace NodeJS {
     // firebase emulator
     readonly NEXT_PUBLIC_EMULATOR?: boolean;
 
-    // firebase admin credentials path
-    GOOGLE_APPLICATION_CREDENTIALS?: string;
-
     // firebase admin credentials
     readonly TYPE?: string;
     readonly PROJECT_ID?: string;
