@@ -22,8 +22,8 @@ const handler = async (
     const decodedToken = await auth.verifyIdToken(idToken);
 
     res.status(200).json({ data: decodedToken });
-  } catch {
-    res.status(500).json({ error: 'Internal Server Error' });
+  } catch (e) {
+    res.status(500).json({ error: e as string });
   }
 };
 
