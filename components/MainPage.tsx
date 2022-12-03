@@ -47,7 +47,11 @@ export const MainPage = () => {
         </Typography>
       )}
       {!!data?.data?.uid && (
-        <Typography component="h2" variant="subtitle2">
+        <Typography
+          component="h2"
+          variant="subtitle2"
+          sx={{ fontStyle: 'italic' }}
+        >
           {`UID của bạn là: ${data.data.uid}`}
         </Typography>
       )}
