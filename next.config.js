@@ -5,9 +5,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  // compiler: {
-  //   emotion: true,
-  // },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**.googleusercontent.com' },
