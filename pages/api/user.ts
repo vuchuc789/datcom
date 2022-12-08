@@ -1,7 +1,7 @@
 import { FieldValue } from 'firebase-admin/firestore';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse, collection, method } from '../../types/api';
-import { role, User } from '../../types/user';
+import { permission, User } from '../../types/user';
 import { getAuth, getDb } from '../../utils/firebaseAdmin';
 
 const post = async (
@@ -28,7 +28,7 @@ const post = async (
 
   const user: User = {
     user: decodedToken,
-    role: [role.READ_USER],
+    permission: [permission.READ_USER],
     timestamp: FieldValue.serverTimestamp(),
   };
 

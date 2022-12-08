@@ -3,11 +3,11 @@ import { FieldValue } from 'firebase-admin/firestore';
 
 export type User = {
   user: DecodedIdToken;
-  role: role[];
+  permission: permission[];
   timestamp: FieldValue;
 };
 
-export enum role {
+export enum permission {
   READ_USER = 'read_user',
   WRITE_USER = 'write_user',
 }
